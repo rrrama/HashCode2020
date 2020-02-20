@@ -21,7 +21,11 @@ class Solver:
 
                 LibObjects.append(Library(i,bookTypes,signup,booksPerDay))
 
-        return bookValues,days,LibObjects
+        output = {}
+        output["bookValues"] = bookValues
+        output["days"] = days
+        output["libs"] = LibObjects
+        return output
 
 
 
@@ -66,8 +70,13 @@ class Solver:
 
 
 
-    def solve(self):
-        pass
+    def solve(self,data):
+        newLibs = sorted(data["libs"],key = lambda boi: boi.signUpTime)
+        output = {}
+        output["libOrder"] = [boi.id for boi in data["libs"]]
+        output["libBooks"] = {boi.id:boi.books for boi in data["libs"]}
+        output["bookValues"] = data["bookValues"]
+        return output
 
 if __name__ == "__main__":
     solution = Solver()
