@@ -12,7 +12,13 @@ class Library:
         self.books = self.books[self.booksSentPerDay:]
         return result
 
-    def scanBooks():
+    def getTotalBookValue(self,bookValues):
+        b = 0
+        for book in self.books:
+            b += bookValues[book]
+        return b
+
+    def scanBooks(self):
         lis = []
         i = 0
         pointer = self.numDone
@@ -22,3 +28,7 @@ class Library:
             pointer=pointer+1
         self.numDone=self.numDone+self.booksSentPerDay
         return lis
+
+    def calculateWorth(self,bookValues):
+        totalBookValue = self.getTotalBookValue(bookValues)
+        return totalBookValue/(self.booksSentPerDay*self.signUpTime)

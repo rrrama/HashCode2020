@@ -79,5 +79,5 @@ class Solver:
 
 if __name__ == "__main__":
     solution = Solver()
-    
+
     solution.score()
