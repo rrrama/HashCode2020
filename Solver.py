@@ -70,11 +70,12 @@ class Solver:
 
 
     def solve(self,data):
-        newLibs = sorted(data["libs"],key = lambda lib: lib.calculateWorth,reverse=True)
+        b=data["bookValues"]
+        newLibs = sorted(data["libs"],key = lambda lib: lib.calculateWorth(b),reverse=True)
         output = {}
         output["libOrder"] = [lib for lib in newLibs]
         output["libBooks"] = {lib.id:sorted(lib.books,key = lambda boi: data["bookValues"],reverse=True) for lib in data["libs"]}
-        output["bookValues"] = data["bookValues"]
+        output["bookValues"] = b
         return output
 
 if __name__ == "__main__":
