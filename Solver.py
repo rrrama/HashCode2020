@@ -73,5 +73,4 @@ class Solver:
 
 if __name__ == "__main__":
     solution = Solver()
-
-    
+    test = 5
