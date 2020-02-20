@@ -1,3 +1,5 @@
+from Library import Library
+
 class Solver:
 
 
@@ -11,6 +13,18 @@ class Solver:
 
     def readFromFile(self,filename):
         with open(filename) as inpFile:
+            books, libraries, days = self.splitInts(inpFile.readline())
+            bookScores = self.splitInts(inpFile.readline())
+            #fuckin libs
+            LibObjects = []
+            for i in range(libraries):
+                booksPerLib, signup, booksPerDay = self.splitInts(inp.realine())
+                bookTypes = self.splitInts(inp.realine())
+
+                LibObjects.append(Library(i,bookTypes,signup,booksPerDay))
+
+        return books,days,LibObjects
+
 
 
     def writeToFile(self,filename):
