@@ -7,10 +7,11 @@ class Library:
         self.booksSentPerDay = booksSentPerDay
         self.numDone=0
 
-    def getTotalBookValue(self,bookValues):
+    def getTotalBookValue(self,bookValues,done):
         b = 0
         for book in self.books:
-            b += bookValues[book]
+            if book not in done:
+                b += bookValues[book]
         return b
 
     def scanBooks(self):
@@ -24,6 +25,6 @@ class Library:
         self.numDone=self.numDone+self.booksSentPerDay
         return lis
 
-    def calculateWorth(self,bookValues):
-        totalBookValue = self.getTotalBookValue(bookValues)
+    def calculateWorth(self,bookValues,done):
+        totalBookValue = self.getTotalBookValue(bookValues,done)
         return totalBookValue/(self.booksSentPerDay*self.signUpTime)

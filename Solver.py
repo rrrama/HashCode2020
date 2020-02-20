@@ -1,4 +1,5 @@
 from Library import Library
+from queue import Queue
 
 class Solver:
 
@@ -64,7 +65,7 @@ class Solver:
     def score(self):
         for setName in self.datasets:
             inputData = self.readFromFile(setName+".txt")
-            output = self.solve(inputData)
+            output = self.solve2(inputData)
             print(f"Score on data set {setName}: {self.scoreOnDataset(output)}")
             self.writeToFile(setName+"output.txt",output)
 
@@ -76,10 +77,38 @@ class Solver:
         done=set()
         output["libOrder"] = [lib for lib in newLibs]
         output["libBooks"] = {}
+
         for lib in data["libs"]:
             output["libBooks"][lib.id] = sorted(lib.books,key = lambda boi: data["bookValues"][boi] if boi not in done else 0,reverse=True)
             for book in output["libBooks"][lib.id]:
                 done.add(book)
+        output["bookValues"] = data["bookValues"]
+        return output
+
+    def solve2(self,data):
+        b=data["bookValues"]
+        output = {}
+        done=set()
+
+        libOrder = sorted(data["libs"],key = lambda lib: lib.calculateWorth(b,done))
+
+        print(len(libOrder))
+        output["libBooks"] = {}
+        actualOrder=Queue()
+
+        while len(libOrder)>0:
+            lib=libOrder.pop()
+            actualOrder.put(lib)
+            output["libBooks"][lib.id] = sorted(lib.books,key = lambda boi: data["bookValues"][boi] if boi not in done else 0,reverse=True)
+            for book in output["libBooks"][lib.id]:
+                done.add(book)
+            libOrder=sorted(libOrder,key = lambda lib: lib.calculateWorth(b,done))
+            print(len(libOrder))
+
+        output["libOrder"] = []
+
+        while not actualOrder.empty():
+            output["libOrder"].append(actualOrder.get())
         output["bookValues"] = data["bookValues"]
         return output
 
