@@ -6,7 +6,7 @@ class Library:
         self.signUpTime = signUpTime
         self.booksSentPerDay = booksSentPerDay
         self.numDone=0
-    
+
     def getBooks(self):
         result = self.books[:self.booksSentPerDay - 1]
         self.books = self.books[self.booksSentPerDay:]
@@ -20,5 +20,5 @@ class Library:
             lis.append(self.books[pointer])
             i=i+1
             pointer=pointer+1
-        self.numDone=self.numDone+1
+        self.numDone=self.numDone+self.booksSentPerDay
         return lis

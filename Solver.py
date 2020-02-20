@@ -79,6 +79,5 @@ class Solver:
 
 if __name__ == "__main__":
     solution = Solver()
-
-    D = {"libOrder": [1,0], "libBooks": {0:[1,4],1:[0,2,3,5]},"bookValues": [1, 2, 3, 6, 5, 4]}
+    
     solution.score()
