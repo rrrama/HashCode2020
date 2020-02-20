@@ -32,10 +32,10 @@ class Solver:
     def writeToFile(self,filename,data):
         with open(filename,"w") as outFile:
             outFile.write(str(len(data["libOrder"]))+"\n")
-            out = ""
-            for lib in data["libOrder"]:
-                out+=str(lib.id) + " "
-            outFile.write(out+"\n")
+            #out = ""
+            #for lib in data["libOrder"]:
+            #    out+=str(lib.id) + " "
+            #outFile.write(out+"\n")
             for i in range(len(data["libOrder"])):
                 out = ""
                 out+=str(data["libOrder"][i].id) + " "
@@ -73,7 +73,7 @@ class Solver:
         newLibs = sorted(data["libs"],key = lambda boi: boi.signUpTime)
         output = {}
         output["libOrder"] = [lib for lib in newLibs]
-        output["libBooks"] = {lib.id:lib.books for lib in data["libs"]}
+        output["libBooks"] = {lib.id:sorted(lib.books,key = lambda boi: data["bookValues"],reverse=True) for lib in data["libs"]}
         output["bookValues"] = data["bookValues"]
         return output
 
