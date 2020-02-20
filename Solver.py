@@ -16,10 +16,10 @@ class Solver:
             pass
 
         for setName in self.datasets:
-            inputData = self.readFromFile(setName+".in")
+            inputData = self.readFromFile(setName+".txt")
             output = self.solve(inputData)
             print(f"Score on data set {setName}: {self.scoreOnDataset(output)}")
-            self.writeToFile(setName+".txt")
+            self.writeToFile(setName+"output.txt")
 
 
 
