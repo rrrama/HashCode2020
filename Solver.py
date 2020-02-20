@@ -32,6 +32,15 @@ class Solver:
             for lib in data:
                 out+=lib.id + " "
             outFile.write(out+"\n")
+            for i in range(len(data["libOrder"])):
+                out = ""
+                out+=str(data["libOrder"][i].id) + " "
+                out+=str(len(data["libBooks"][i])) + "\n"
+                outFile.write(out)
+                out = ""
+                for a in data["libBooks"][data["libOrder"][i].id]:
+                    out+=str(a)+" "
+                outFile.write(out+"\n")
 
 
     def score(self,):
