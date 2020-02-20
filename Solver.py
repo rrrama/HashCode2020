@@ -42,26 +42,26 @@ class Solver:
                     out+=str(a)+" "
                 outFile.write(out+"\n")
 
+    def scoreOnDataset(self,data):
+        bookList = data["libBooks"]
+        bookValues = data["bookValues"]
+        score=0
+        booksDone = set()
+
+        for list in bookList.values():
+            for book in list:
+                if book not in booksDone:
+                    score += bookValues[book]
+                    booksDone.add(book)
+
+        return score
 
     def score(self):
-        def scoreOnDataset(inputData, data):
-            bookList = data.get(libBooks)
-            bookValues = data.get(bookValues)
-            score=0
-            booksDone = []
-
-            for list in bookList.values():
-                for book in list:
-                    if book not in booksDone:
-                        score += bookValues[book]
-                        booksDone.append(book)
-
-            return score
 
         for setName in self.datasets:
             inputData = self.readFromFile(setName+".txt")
             output = self.solve(inputData)
-            print(f"Score on data set {setName}: {self.scoreOnDataset(inputData,output)}")
+            print(f"Score on data set {setName}: {self.scoreOnDataset(output)}")
             self.writeToFile(setName+"output.txt")
 
 
@@ -69,8 +69,8 @@ class Solver:
     def solve(self):
         pass
 
-
-
 if __name__ == "__main__":
     solution = Solver()
-    test = 5
+
+    D = {"libOrder": [1,0], "libBooks": {0:[1,4],1:[0,2,3,5]},"bookValues": [1, 2, 3, 6, 5, 4]}
+    print(solution.scoreOnDataset(D))
