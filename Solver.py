@@ -35,9 +35,19 @@ class Solver:
 
 
     def score(self,):
-        def scoreOnDataset(inputData, order):
-            books,days,LibObjects = inputData
-            
+        def scoreOnDataset(inputData, data):
+            bookList = data.get(libBooks)
+            bookValues = data.get(bookValues)
+            score=0
+            booksDone = []
+
+            for list in bookList.values():
+                for book in list:
+                    if book not in booksDone:
+                        score += bookValues[book]
+                        booksDone.append(book)
+
+            return score
 
         for setName in self.datasets:
             inputData = self.readFromFile(setName+".txt")
