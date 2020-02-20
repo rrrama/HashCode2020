@@ -70,8 +70,7 @@ class Solver:
 
 
     def solve(self,data):
-        newLibs = sorted(data["libs"],key = lambda boi: boi.signUpTime)
-        done = set()
+        newLibs = sorted(data["libs"],key = lambda lib: lib.calculateWorth,reverse=True)
         output = {}
         output["libOrder"] = [lib for lib in newLibs]
         output["libBooks"] = {}

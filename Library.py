@@ -7,11 +7,6 @@ class Library:
         self.booksSentPerDay = booksSentPerDay
         self.numDone=0
 
-    def getBooks(self):
-        result = self.books[:self.booksSentPerDay - 1]
-        self.books = self.books[self.booksSentPerDay:]
-        return result
-
     def getTotalBookValue(self,bookValues):
         b = 0
         for book in self.books:
