@@ -40,7 +40,7 @@ class Solver:
                 out = ""
                 out+=str(data["libOrder"][i].id) + " "
 
-                out+=str(len(data["libBooks"][i])) + "\n"
+                out+=str(len(data["libBooks"][data["libOrder"][i].id])) + "\n"
                 outFile.write(out)
                 out = ""
                 for a in data["libBooks"][data["libOrder"][i].id]:
@@ -73,9 +73,14 @@ class Solver:
         b=data["bookValues"]
         newLibs = sorted(data["libs"],key = lambda lib: lib.calculateWorth(b),reverse=True)
         output = {}
+        done=set()
         output["libOrder"] = [lib for lib in newLibs]
-        output["libBooks"] = {lib.id:sorted(lib.books,key = lambda boi: data["bookValues"],reverse=True) for lib in data["libs"]}
-        output["bookValues"] = b
+        output["libBooks"] = {}
+        for lib in data["libs"]:
+            output["libBooks"][lib.id] = sorted(lib.books,key = lambda boi: data["bookValues"][boi] if boi not in done else 0,reverse=True)
+            for book in output["libBooks"][lib.id]:
+                done.add(book)
+        output["bookValues"] = data["bookValues"]
         return output
 
 if __name__ == "__main__":
