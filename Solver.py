@@ -43,7 +43,7 @@ class Solver:
                 outFile.write(out+"\n")
 
 
-    def score(self,):
+    def score(self):
         def scoreOnDataset(inputData, data):
             bookList = data.get(libBooks)
             bookValues = data.get(bookValues)
@@ -68,3 +68,10 @@ class Solver:
 
     def solve(self):
         pass
+
+
+
+if __name__ == "__main__":
+    solution = Solver()
+
+    
