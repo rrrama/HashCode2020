@@ -2,8 +2,6 @@ from Library import Library
 
 class Solver:
 
-
-
     def __init__(self):
         self.datasets = ["a_example","b_read_on","c_incunabula","d_tough_choices","e_so_many_books","f_libraries_of_the_world"]
 
@@ -31,13 +29,14 @@ class Solver:
         pass
 
     def score(self,):
-        def scoreOnDataset():
-            pass
+        def scoreOnDataset(inputData, order):
+            books,days,LibObjects = inputData
+            
 
         for setName in self.datasets:
             inputData = self.readFromFile(setName+".txt")
             output = self.solve(inputData)
-            print(f"Score on data set {setName}: {self.scoreOnDataset(output)}")
+            print(f"Score on data set {setName}: {self.scoreOnDataset(inputData,output)}")
             self.writeToFile(setName+"output.txt")
 
 
