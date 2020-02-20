@@ -10,9 +10,9 @@ class Solver:
         return [int(i) for i in inpStr.strip().split(" ")]
 
     def readFromFile(self,filename):
-        with open(filename) as inpFile:
+        with open(filename,"r") as inpFile:
             books, libraries, days = self.splitInts(inpFile.readline())
-            bookScores = self.splitInts(inpFile.readline())
+            bookValues = self.splitInts(inpFile.readline())
             #fuckin libs
             LibObjects = []
             for i in range(libraries):
@@ -21,12 +21,18 @@ class Solver:
 
                 LibObjects.append(Library(i,bookTypes,signup,booksPerDay))
 
-        return books,days,LibObjects
+        return bookValues,days,LibObjects
 
 
 
-    def writeToFile(self,filename):
-        pass
+    def writeToFile(self,filename,data):
+        with open(filename,"w") as outFile:
+            outFile.write(str(len(data))+"\n")
+            out = ""
+            for lib in data:
+                out+=lib.id + " "
+            outFile.write(out+"\n")
+
 
     def score(self,):
         def scoreOnDataset(inputData, order):
